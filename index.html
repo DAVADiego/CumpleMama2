@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feliz Cumpleaños Mamá 🎉</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      color: #333;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Confeti */
+    .confeti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background-color: #fff;
+      animation: caer 5s linear infinite;
+      z-index: 0;
+    }
+    @keyframes caer {
+      to { transform: translateY(100vh) rotate(720deg); }
+    }
+
+    /* Encabezado */
+    header {
+      padding: 80px 20px 40px;
+    }
+    header h1 {
+      font-size: 3.5em;
+      color: #fff;
+      text-shadow: 3px 3px 8px rgba(0,0,0,0.6);
+      animation: brillo 3s infinite alternate;
+    }
+    header h2 {
+      font-size: 1.8em;
+      color: #fff;
+      margin-top: 15px;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
+    }
+    @keyframes brillo {
+      from { text-shadow: 0 0 10px #fff, 0 0 20px #ff99cc, 0 0 30px #ff3399; }
+      to { text-shadow: 0 0 20px #fff, 0 0 40px #ff6699, 0 0 60px #ff3366; }
+    }
+
+    /* Botón música */
+    #playMusic {
+      background: #ff3366;
+      color: white;
+      font-size: 1.3em;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      margin-top: 20px;
+      animation: latido 1.5s infinite;
+    }
+    @keyframes latido {
+      0%,100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    /* Portadas */
+    .portada {
+      margin: 40px 0;
+      animation: aparecer 2s ease;
+    }
+    .portada img {
+      width: 80%;
+      max-width: 650px;
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+      cursor: pointer;
+    }
+    .portada p {
+      margin-top: 15px;
+      font-size: 1.6em;
+      color: #fff;
+      font-weight: bold;
+    }
+    @keyframes aparecer {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Mensajes intermedios */
+    .mensaje {
+      font-size: 1.8em;
+      font-weight: bold;
+      color: #fff;
+      margin: 50px 0;
+      animation: escribir 6s steps(40) infinite;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 3px solid #fff;
+      width: 24ch;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    @keyframes escribir {
+      from { width: 0; }
+      to { width: 24ch; }
+    }
+
+    /* Carrusel */
+    .carrusel {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      margin: 60px auto;
+      overflow: hidden;
+    }
+    .carrusel-track {
+      display: flex;
+      transition: transform 0.8s ease;
+    }
+    .carrusel img {
+      width: 200px;
+      height: auto;
+      margin: 0 10px;
+      border-radius: 15px;
+      opacity: 0.5;
+      transform: scale(0.8);
+      transition: transform 0.5s, opacity 0.5s;
+      cursor: pointer;
+    }
+    .carrusel img.centro {
+      transform: scale(1.3);
+      opacity: 1;
+      z-index: 10;
+    }
+
+    /* Flechas carrusel */
+    .flecha {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2.5em;
+      color: white;
+      background: rgba(0,0,0,0.4);
+      border-radius: 50%;
+      padding: 10px;
+      cursor: pointer;
+      user-select: none;
+      z-index: 10;
+    }
+    .flecha.izq { left: 10px; }
+    .flecha.der { right: 10px; }
+    .flecha:hover { background: rgba(0,0,0,0.7); }
+
+    footer {
+      margin: 60px 0 40px;
+      font-size: 1.5em;
+      color: #fff;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+      animation: brillo 2s infinite alternate;
+    }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    .lightbox img {
+      max-width: 90%;
+      max-height: 70%;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255,255,255,0.6);
+    }
+    .lightbox span.close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 3em;
+      color: white;
+      cursor: pointer;
+    }
+    .lightbox p {
+      color: #fff;
+      font-size: 1.5em;
+      margin-top: 20px;
+    }
+    .lightbox .nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 3em;
+      color: white;
+      cursor: pointer;
+      user-select: none;
+      padding: 15px;
+      background: rgba(0,0,0,0.5);
+      border-radius: 50%;
+    }
+    .lightbox .nav.izq { left: 30px; }
+    .lightbox .nav.der { right: 30px; }
+    .lightbox .nav:hover { background: rgba(0,0,0,0.8); }
+  </style>
+</head>
+<body>
+  <!-- Encabezado -->
+  <header>
+    <h1>🎂 ¡Feliz 60 cumpleaños, Mamá! 🎉</h1>
+    <h2>Con todo mi amor, desde Colombia hasta España</h2>
+    <button id="playMusic">▶ Reproducir música</button>
+  </header>
+
+  <!-- Portada 1 -->
+  <section class="portada">
+    <img src="fotos/foto1.JPEG" alt="Portada 1">
+    <p>Hoy celebramos tu vida, tu amor y tu alegría ✨</p>
+  </section>
+
+  <!-- Mensaje intermedio -->
+  <div class="mensaje">Gracias por ser mi guía ❤️</div>
+
+  <!-- Carrusel -->
+  <section class="carrusel">
+    <div class="carrusel-track" id="carrusel-track">
+      <img src="fotos/foto2.JPEG" alt="Foto 2">
+      <img src="fotos/foto3.JPEG" alt="Foto 3">
+      <img src="fotos/foto4.JPEG" alt="Foto 4">
+      <img src="fotos/foto5.JPEG" alt="Foto 5">
+      <img src="fotos/foto6.JPEG" alt="Foto 6">
+      <img src="fotos/foto7.JPEG" alt="Foto 7">
+      <img src="fotos/foto8.JPEG" alt="Foto 8">
+      <img src="fotos/foto9.JPEG" alt="Foto 9">
+      <img src="fotos/foto10.JPEG" alt="Foto 10">
+      <img src="fotos/foto11.JPEG" alt="Foto 11">
+      <img src="fotos/foto13.jpg" alt="Foto 13">
+      <img src="fotos/foto14.jpg" alt="Foto 14">
+      <img src="fotos/foto15.jpg" alt="Foto 15">
+      <img src="fotos/foto16.jpg" alt="Foto 16">
+      <img src="fotos/foto17.jpg" alt="Foto 17">
+      <img src="fotos/foto18.jpg" alt="Foto 18">
+      <img src="fotos/foto19.jpg" alt="Foto 19">
+      <img src="fotos/foto20.jpg" alt="Foto 20">
+      <img src="fotos/foto21.jpg" alt="Foto 21">
+      <img src="fotos/foto22.jpg" alt="Foto 22">
+      <img src="fotos/foto23.jpg" alt="Foto 23">
+      <img src="fotos/foto24.jpg" alt="Foto 24">
+      <img src="fotos/foto25.jpg" alt="Foto 25">
+      <img src="fotos/foto26.jpg" alt="Foto 26">
+    </div>
+    <div class="flecha izq" onclick="moverCarrusel(-1)">❮</div>
+    <div class="flecha der" onclick="moverCarrusel(1)">❯</div>
+  </section>
+
+  <!-- Mensaje intermedio -->
+  <div class="mensaje">¡60 años de amor y alegría! 🎊</div>
+
+  <!-- Portada 2 -->
+  <section class="portada">
+    <img src="fotos/foto12.jpg" alt="Portada 2">
+    <p>Eres la reina de nuestra familia 👑</p>
+  </section>
+
+  <!-- Final -->
+  <footer>
+    🌹 ¡Te amo, Mamá! Feliz cumpleaños #60 🎂  
+    <br>Tu hijo, Alejandro 💖
+  </footer>
+
+  <!-- Música -->
+  <audio id="audio" src="musica/SerenataAMamá.mp3"></audio>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <span class="close" id="closeLightbox">✖</span>
+    <span class="nav izq" id="prevLightbox">❮</span>
+    <img id="lightboxImg" src="">
+    <span class="nav der" id="nextLightbox">❯</span>
+    <p id="lightboxText"></p>
+  </div>
+
+  <script>
+    // Frases
+    const frases = [
+      "Recuerdo lleno de sonrisas 😊",
+      "Un día especial que siempre guardamos en el corazón ❤️",
+      "Tu alegría ilumina cada momento ✨",
+      "Familia y amor en un solo instante 👨‍👩‍👧‍👦",
+      "La ternura que solo tú sabes dar 💕",
+      "Un viaje inolvidable 🚗",
+      "Momentos mágicos contigo 🌟",
+      "Siempre siendo nuestro apoyo 💪",
+      "Tus abrazos son mi refugio 🤗",
+      "Un día lleno de amor 💖",
+      "Tu fuerza nos inspira 💎",
+      "Siempre con esa sonrisa 🌸",
+      "La reina de nuestra familia 👑",
+      "Cálido como tu corazón 💞",
+      "Instantes que atesoramos 🌹",
+      "Siempre con tu bondad 💫",
+      "La alegría de tenerte con nosotros 🎉",
+      "Momentos de felicidad pura 😍",
+      "Tus consejos nos guían 🕊️",
+      "Una vida llena de amor verdadero ❤️",
+      "Eres nuestra bendición 🙏",
+      "El alma de nuestra familia 💖",
+      "Siempre estaremos agradecidos 💐",
+      "Gracias por ser tú 🌟"
+    ];
+
+    // Música
+    const audio = document.getElementById("audio");
+    const playBtn = document.getElementById("playMusic");
+    playBtn.addEventListener("click", () => {
+      audio.play();
+      playBtn.style.display = "none";
+    });
+
+    // Carrusel
+    const track = document.getElementById("carrusel-track");
+    const imgs = track.getElementsByTagName("img");
+    let index = 0;
+
+    function mostrarCarrusel() {
+      for (let i = 0; i < imgs.length; i++) {
+        imgs[i].classList.remove("centro");
+      }
+      imgs[index].classList.add("centro");
+      const offset = -index * 220;
+      track.style.transform = `translateX(${offset + (track.parentElement.offsetWidth/2 - 110)}px)`;
+    }
+    function moverCarrusel(dir) {
+      index += dir;
+      if (index < 0) index = imgs.length - 1;
+      if (index >= imgs.length) index = 0;
+      mostrarCarrusel();
+    }
+    setInterval(() => moverCarrusel(1), 5000);
+    mostrarCarrusel();
+
+    // Lightbox
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightboxImg");
+    const lightboxText = document.getElementById("lightboxText");
+    const closeLightbox = document.getElementById("closeLightbox");
+    const prevLightbox = document.getElementById("prevLightbox");
+    const nextLightbox = document.getElementById("nextLightbox");
+    let currentIndex = 0;
+
+    function openLightbox(i) {
+      currentIndex = i;
+      lightbox.style.display = "flex";
+      lightboxImg.src = imgs[i].src;
+      lightboxText.textContent = frases[i % frases.length] || "";
+    }
+
+    for (let i = 0; i < imgs.length; i++) {
+      imgs[i].addEventListener("click", () => openLightbox(i));
+    }
+
+    function close() { lightbox.style.display = "none"; }
+    function prev() {
+      currentIndex = (currentIndex - 1 + imgs.length) % imgs.length;
+      openLightbox(currentIndex);
+    }
+    function next() {
+      currentIndex = (currentIndex + 1) % imgs.length;
+      openLightbox(currentIndex);
+    }
+
+    closeLightbox.addEventListener("click", close);
+    prevLightbox.addEventListener("click", prev);
+    nextLightbox.addEventListener("click", next);
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox) close();
+    });
+
+    // Confeti
+    for (let i = 0; i < 50; i++) {
+      const confeti = document.createElement("div");
+      confeti.classList.add("confeti");
+      confeti.style.left = Math.random() * 100 + "vw";
+      confeti.style.top = -Math.random() * 20 + "vh";
+      confeti.style.backgroundColor = ["#ff3366","#ffcc00","#66ccff","#33cc33"][Math.floor(Math.random()*4)];
+      confeti.style.animationDuration = (Math.random() * 3 + 2) + "s";
+      document.body.appendChild(confeti);
+    }
+  </script>
+</body>
+</html>
