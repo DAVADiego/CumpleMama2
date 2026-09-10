@@ -3,301 +3,691 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Feliz Cumpleaños Mamá 🎉</title>
+  <meta name="theme-color" content="#d94f87">
+  <title>Feliz Cumpleaños Mamá 🎂❤️</title>
+
   <style>
-    body {
-      margin: 0;
-      font-family: 'Arial', sans-serif;
-      text-align: center;
-      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
-      color: #333;
-      overflow-x: hidden;
-      position: relative;
+    :root{
+      --rosa:#ff5c93;
+      --rosa-2:#ff8fb5;
+      --vino:#8f2858;
+      --crema:#fff7fb;
+      --blanco:rgba(255,255,255,.88);
+      --sombra:0 20px 60px rgba(80,18,50,.22);
     }
 
-    /* Confeti */
-    .confeti {
-      position: fixed;
-      width: 10px;
-      height: 10px;
-      background-color: #fff;
-      animation: caer 5s linear infinite;
-      z-index: 0;
+    *{box-sizing:border-box}
+
+    html{
+      scroll-behavior:smooth;
     }
-    @keyframes caer {
-      to { transform: translateY(100vh) rotate(720deg); }
+
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:#4b2940;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(255,255,255,.8), transparent 25%),
+        radial-gradient(circle at 90% 20%, rgba(255,255,255,.5), transparent 22%),
+        linear-gradient(135deg,#ffdce8 0%,#f7b7cc 45%,#d982aa 100%);
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background:linear-gradient(120deg,rgba(255,255,255,.18),transparent 45%,rgba(255,255,255,.12));
+      z-index:-2;
+    }
+
+    /* Barra de progreso */
+    #progress{
+      position:fixed;
+      top:0;
+      left:0;
+      width:0%;
+      height:4px;
+      background:linear-gradient(90deg,#ff3d7f,#ffd166,#ff3d7f);
+      z-index:3000;
+      box-shadow:0 0 15px rgba(255,61,127,.8);
+    }
+
+    /* Fondo decorativo */
+    .orb{
+      position:fixed;
+      border-radius:50%;
+      filter:blur(2px);
+      opacity:.35;
+      pointer-events:none;
+      z-index:-1;
+      animation:flotar 8s ease-in-out infinite;
+    }
+
+    .orb.one{width:180px;height:180px;background:#fff;top:8%;left:-60px}
+    .orb.two{width:230px;height:230px;background:#ffd1e2;right:-80px;top:40%;animation-delay:2s}
+    .orb.three{width:140px;height:140px;background:#fff;left:10%;bottom:5%;animation-delay:4s}
+
+    @keyframes flotar{
+      50%{transform:translateY(-25px) translateX(12px)}
+    }
+
+    /* Corazones */
+    .corazones{
+      position:fixed;
+      inset:0;
+      overflow:hidden;
+      pointer-events:none;
+      z-index:0;
+    }
+
+    .corazon{
+      position:absolute;
+      bottom:-50px;
+      font-size:22px;
+      opacity:.55;
+      animation:subir linear infinite;
+    }
+
+    @keyframes subir{
+      from{transform:translateY(0) rotate(0deg);opacity:0}
+      15%{opacity:.55}
+      to{transform:translateY(-115vh) rotate(25deg);opacity:0}
     }
 
     /* Encabezado */
-    header {
-      padding: 80px 20px 40px;
+    header{
+      min-height:92vh;
+      padding:80px 20px 60px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      position:relative;
+      z-index:1;
     }
-    header h1 {
-      font-size: 3.5em;
-      color: #fff;
-      text-shadow: 3px 3px 8px rgba(0,0,0,0.6);
-      animation: brillo 3s infinite alternate;
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:9px 16px;
+      border:1px solid rgba(255,255,255,.7);
+      background:rgba(255,255,255,.25);
+      backdrop-filter:blur(12px);
+      border-radius:999px;
+      color:#fff;
+      font-weight:700;
+      letter-spacing:.5px;
+      box-shadow:0 8px 25px rgba(93,23,57,.12);
+      animation:aparecer .9s ease both;
     }
-    header h2 {
-      font-size: 1.8em;
-      color: #fff;
-      margin-top: 15px;
-      text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
+
+    header h1{
+      max-width:1000px;
+      margin:25px auto 12px;
+      color:#fff;
+      font-size:clamp(2.5rem,7vw,5.8rem);
+      line-height:1.02;
+      text-shadow:0 8px 35px rgba(85,15,48,.35);
+      animation:titulo 1.2s ease both;
     }
-    @keyframes brillo {
-      from { text-shadow: 0 0 10px #fff, 0 0 20px #ff99cc, 0 0 30px #ff3399; }
-      to { text-shadow: 0 0 20px #fff, 0 0 40px #ff6699, 0 0 60px #ff3366; }
+
+    header h2{
+      max-width:800px;
+      margin:0;
+      color:#fff;
+      font-size:clamp(1.05rem,2.5vw,1.65rem);
+      font-weight:500;
+      text-shadow:0 3px 12px rgba(85,15,48,.3);
+      animation:aparecer 1.2s .25s ease both;
+    }
+
+    @keyframes titulo{
+      from{opacity:0;transform:translateY(30px) scale(.96)}
+      to{opacity:1;transform:none}
+    }
+
+    @keyframes aparecer{
+      from{opacity:0;transform:translateY(25px)}
+      to{opacity:1;transform:none}
     }
 
     /* Botón música */
-    #playMusic {
-      background: #ff3366;
-      color: white;
-      font-size: 1.3em;
-      padding: 12px 20px;
-      border: none;
-      border-radius: 25px;
-      cursor: pointer;
-      margin-top: 20px;
-      animation: latido 1.5s infinite;
-    }
-    @keyframes latido {
-      0%,100% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-    }
-
-    /* Portadas */
-    .portada {
-      margin: 40px 0;
-      animation: aparecer 2s ease;
-    }
-    .portada img {
-      width: 80%;
-      max-width: 650px;
-      border-radius: 20px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-      cursor: pointer;
-    }
-    .portada p {
-      margin-top: 15px;
-      font-size: 1.6em;
-      color: #fff;
-      font-weight: bold;
-    }
-    @keyframes aparecer {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+    #playMusic{
+      margin-top:32px;
+      border:0;
+      padding:14px 24px;
+      border-radius:999px;
+      color:#fff;
+      background:rgba(255,255,255,.2);
+      border:1px solid rgba(255,255,255,.7);
+      backdrop-filter:blur(12px);
+      font-size:1rem;
+      font-weight:800;
+      cursor:pointer;
+      box-shadow:0 12px 30px rgba(87,18,51,.2);
+      transition:.25s ease;
     }
 
-    /* Mensajes intermedios */
-    .mensaje {
-      font-size: 1.8em;
-      font-weight: bold;
-      color: #fff;
-      margin: 50px 0;
-      animation: escribir 6s steps(40) infinite;
-      white-space: nowrap;
-      overflow: hidden;
-      border-right: 3px solid #fff;
-      width: 24ch;
-      margin-left: auto;
-      margin-right: auto;
+    #playMusic:hover{
+      transform:translateY(-3px) scale(1.03);
+      background:rgba(255,255,255,.32);
     }
-    @keyframes escribir {
-      from { width: 0; }
-      to { width: 24ch; }
+
+    #playMusic.playing{
+      background:rgba(143,40,88,.72);
+    }
+
+    /* Secciones */
+    .seccion{
+      width:min(1050px,92%);
+      margin:0 auto 80px;
+      position:relative;
+      z-index:1;
+    }
+
+    .portada{
+      text-align:center;
+      margin:40px auto 80px;
+    }
+
+    .foto-marco{
+      position:relative;
+      width:min(720px,100%);
+      margin:auto;
+      padding:10px;
+      border-radius:30px;
+      background:rgba(255,255,255,.35);
+      border:1px solid rgba(255,255,255,.6);
+      box-shadow:var(--sombra);
+      backdrop-filter:blur(10px);
+    }
+
+    .foto-marco::after{
+      content:"";
+      position:absolute;
+      inset:12px;
+      border:1px solid rgba(255,255,255,.5);
+      border-radius:23px;
+      pointer-events:none;
+    }
+
+    .foto-marco img{
+      display:block;
+      width:100%;
+      max-height:720px;
+      object-fit:cover;
+      border-radius:23px;
+      cursor:pointer;
+      transition:transform .5s ease;
+    }
+
+    .foto-marco:hover img{
+      transform:scale(1.015);
+    }
+
+    .portada p{
+      margin:22px auto 0;
+      max-width:800px;
+      color:#fff;
+      font-size:clamp(1.15rem,3vw,1.8rem);
+      font-weight:800;
+      text-shadow:0 4px 14px rgba(70,12,40,.35);
+    }
+
+    /* Mensaje */
+    .mensaje-box{
+      width:min(900px,92%);
+      margin:20px auto 90px;
+      text-align:center;
+      padding:32px 22px;
+      border-radius:28px;
+      background:rgba(255,255,255,.2);
+      border:1px solid rgba(255,255,255,.55);
+      backdrop-filter:blur(14px);
+      box-shadow:var(--sombra);
+    }
+
+    .mensaje-label{
+      font-size:.78rem;
+      text-transform:uppercase;
+      letter-spacing:3px;
+      color:rgba(255,255,255,.85);
+      font-weight:800;
+      margin-bottom:12px;
+    }
+
+    .mensaje{
+      min-height:58px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      margin:0;
+      color:#fff;
+      font-size:clamp(1.25rem,3vw,2rem);
+      line-height:1.35;
+      font-weight:850;
+      text-shadow:0 4px 14px rgba(70,12,40,.3);
+      transition:opacity .45s ease, transform .45s ease;
+    }
+
+    .mensaje.ocultar{
+      opacity:0;
+      transform:translateY(-12px) scale(.97);
+    }
+
+    .mensaje.mostrar{
+      animation:mensajeEntrada .7s ease;
+    }
+
+    @keyframes mensajeEntrada{
+      from{opacity:0;transform:translateY(15px) scale(.97)}
+      to{opacity:1;transform:none}
+    }
+
+    /* Títulos */
+    .titulo-seccion{
+      text-align:center;
+      color:#fff;
+      margin-bottom:25px;
+    }
+
+    .titulo-seccion h3{
+      font-size:clamp(1.8rem,4vw,2.8rem);
+      margin:0 0 8px;
+      text-shadow:0 4px 14px rgba(70,12,40,.3);
+    }
+
+    .titulo-seccion p{
+      margin:0;
+      color:rgba(255,255,255,.85);
     }
 
     /* Carrusel */
-    .carrusel {
-      position: relative;
-      width: 100%;
-      max-width: 800px;
-      margin: 60px auto;
-      overflow: hidden;
-    }
-    .carrusel-track {
-      display: flex;
-      transition: transform 0.8s ease;
-    }
-    .carrusel img {
-      width: 200px;
-      height: auto;
-      margin: 0 10px;
-      border-radius: 15px;
-      opacity: 0.5;
-      transform: scale(0.8);
-      transition: transform 0.5s, opacity 0.5s;
-      cursor: pointer;
-    }
-    .carrusel img.centro {
-      transform: scale(1.3);
-      opacity: 1;
-      z-index: 10;
+    .carrusel{
+      position:relative;
+      width:100%;
+      overflow:hidden;
+      padding:35px 0 45px;
+      border-radius:35px;
+      background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.3);
+      box-shadow:var(--sombra);
+      backdrop-filter:blur(8px);
     }
 
-    /* Flechas carrusel */
-    .flecha {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 2.5em;
-      color: white;
-      background: rgba(0,0,0,0.4);
-      border-radius: 50%;
-      padding: 10px;
-      cursor: pointer;
-      user-select: none;
-      z-index: 10;
+    .carrusel-track{
+      display:flex;
+      align-items:center;
+      transition:transform .7s cubic-bezier(.22,.61,.36,1);
+      will-change:transform;
     }
-    .flecha.izq { left: 10px; }
-    .flecha.der { right: 10px; }
-    .flecha:hover { background: rgba(0,0,0,0.7); }
 
-    footer {
-      margin: 60px 0 40px;
-      font-size: 1.5em;
-      color: #fff;
-      text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
-      animation: brillo 2s infinite alternate;
+    .carrusel-item{
+      flex:0 0 220px;
+      margin:0 8px;
+      position:relative;
+    }
+
+    .carrusel-item img{
+      display:block;
+      width:220px;
+      height:290px;
+      object-fit:cover;
+      border-radius:22px;
+      opacity:.48;
+      transform:scale(.84);
+      filter:saturate(.75);
+      transition:transform .55s ease,opacity .55s ease,filter .55s ease,box-shadow .55s ease;
+      cursor:pointer;
+    }
+
+    .carrusel-item.centro img{
+      opacity:1;
+      transform:scale(1);
+      filter:saturate(1.15);
+      box-shadow:0 20px 40px rgba(71,10,39,.3);
+    }
+
+    .flecha{
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      width:50px;
+      height:50px;
+      border:1px solid rgba(255,255,255,.55);
+      border-radius:50%;
+      background:rgba(80,20,52,.35);
+      backdrop-filter:blur(10px);
+      color:#fff;
+      font-size:1.7rem;
+      display:grid;
+      place-items:center;
+      cursor:pointer;
+      z-index:5;
+      transition:.2s;
+      user-select:none;
+    }
+
+    .flecha:hover{
+      background:rgba(80,20,52,.7);
+      transform:translateY(-50%) scale(1.08);
+    }
+
+    .flecha.izq{left:15px}
+    .flecha.der{right:15px}
+
+    .contador{
+      position:absolute;
+      left:50%;
+      bottom:12px;
+      transform:translateX(-50%);
+      padding:7px 14px;
+      border-radius:999px;
+      background:rgba(60,15,40,.45);
+      color:#fff;
+      font-size:.82rem;
+      font-weight:700;
+      backdrop-filter:blur(8px);
+    }
+
+    /* Segunda portada */
+    .portada-final{
+      margin-top:90px;
+    }
+
+    /* Footer */
+    footer{
+      text-align:center;
+      padding:90px 20px 55px;
+      color:#fff;
+      position:relative;
+      z-index:1;
+    }
+
+    .corazon-grande{
+      font-size:3.5rem;
+      animation:latido 1.4s infinite;
+      display:inline-block;
+    }
+
+    footer h3{
+      margin:10px 0;
+      font-size:clamp(1.8rem,5vw,3rem);
+      text-shadow:0 5px 18px rgba(70,12,40,.35);
+    }
+
+    footer p{
+      margin:8px 0;
+      font-size:1.1rem;
+      color:rgba(255,255,255,.9);
+    }
+
+    @keyframes latido{
+      0%,100%{transform:scale(1)}
+      50%{transform:scale(1.13)}
     }
 
     /* Lightbox */
-    .lightbox {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.9);
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
+    .lightbox{
+      display:none;
+      position:fixed;
+      inset:0;
+      z-index:2000;
+      padding:25px;
+      background:rgba(25,5,17,.92);
+      backdrop-filter:blur(14px);
+      justify-content:center;
+      align-items:center;
+      flex-direction:column;
+      animation:fade .25s ease;
     }
-    .lightbox img {
-      max-width: 90%;
-      max-height: 70%;
-      border-radius: 20px;
-      box-shadow: 0 0 20px rgba(255,255,255,0.6);
+
+    .lightbox.activo{display:flex}
+
+    .lightbox img{
+      max-width:min(90vw,1000px);
+      max-height:72vh;
+      object-fit:contain;
+      border-radius:22px;
+      box-shadow:0 20px 70px rgba(0,0,0,.5);
     }
-    .lightbox span.close {
-      position: absolute;
-      top: 20px;
-      right: 30px;
-      font-size: 3em;
-      color: white;
-      cursor: pointer;
+
+    .lightbox p{
+      max-width:850px;
+      margin:18px auto 0;
+      color:#fff;
+      font-size:clamp(1rem,2.5vw,1.4rem);
+      text-align:center;
     }
-    .lightbox p {
-      color: #fff;
-      font-size: 1.5em;
-      margin-top: 20px;
+
+    .close{
+      position:absolute;
+      top:18px;
+      right:25px;
+      width:48px;
+      height:48px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      color:#fff;
+      font-size:1.5rem;
+      background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.25);
+      cursor:pointer;
     }
-    .lightbox .nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 3em;
-      color: white;
-      cursor: pointer;
-      user-select: none;
-      padding: 15px;
-      background: rgba(0,0,0,0.5);
-      border-radius: 50%;
+
+    .lightbox .nav{
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      width:52px;
+      height:52px;
+      display:grid;
+      place-items:center;
+      border-radius:50%;
+      color:#fff;
+      background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.25);
+      font-size:1.7rem;
+      cursor:pointer;
+      user-select:none;
     }
-    .lightbox .nav.izq { left: 30px; }
-    .lightbox .nav.der { right: 30px; }
-    .lightbox .nav:hover { background: rgba(0,0,0,0.8); }
+
+    .lightbox .nav.izq{left:22px}
+    .lightbox .nav.der{right:22px}
+
+    /* Confeti */
+    .confeti{
+      position:fixed;
+      top:-15px;
+      width:9px;
+      height:13px;
+      border-radius:2px;
+      z-index:100;
+      pointer-events:none;
+      animation:caer linear forwards;
+    }
+
+    @keyframes caer{
+      to{
+        transform:translateY(110vh) rotate(720deg);
+        opacity:0;
+      }
+    }
+
+    /* Revelado al hacer scroll */
+    .revelar{
+      opacity:0;
+      transform:translateY(35px);
+      transition:opacity .8s ease,transform .8s ease;
+    }
+
+    .revelar.visible{
+      opacity:1;
+      transform:none;
+    }
+
+    /* Móvil */
+    @media(max-width:650px){
+      header{
+        min-height:88vh;
+        padding-top:65px;
+      }
+
+      .carrusel{
+        padding-top:25px;
+      }
+
+      .carrusel-item{
+        flex-basis:175px;
+      }
+
+      .carrusel-item img{
+        width:175px;
+        height:235px;
+      }
+
+      .flecha{
+        width:42px;
+        height:42px;
+      }
+
+      .flecha.izq{left:8px}
+      .flecha.der{right:8px}
+
+      .lightbox .nav{
+        width:42px;
+        height:42px;
+      }
+
+      .lightbox .nav.izq{left:8px}
+      .lightbox .nav.der{right:8px}
+    }
+
+    @media(prefers-reduced-motion:reduce){
+      *,*::before,*::after{
+        animation-duration:.01ms !important;
+        animation-iteration-count:1 !important;
+        scroll-behavior:auto !important;
+        transition-duration:.01ms !important;
+      }
+    }
   </style>
 </head>
+
 <body>
-  <!-- Encabezado -->
+  <div id="progress"></div>
+
+  <div class="orb one"></div>
+  <div class="orb two"></div>
+  <div class="orb three"></div>
+  <div class="corazones" id="corazones"></div>
+
   <header>
+    <div class="badge">💐 Un día para celebrar a mamá</div>
+
     <h1>🎂 ¡Feliz cumpleaños #61, Mamita linda! 🎉</h1>
-    <h2>Con todo mi amor, desde Colombia hasta España</h2>
-    <button id="playMusic">▶ Reproducir música</button>
+
+    <h2>Con todo mi amor, desde Colombia hasta España 🇨🇴❤️🇪🇸</h2>
+
+    <button id="playMusic" type="button">▶️ Reproducir nuestra serenata</button>
   </header>
 
-  <!-- Portada 1 -->
-  <section class="portada">
-    <img src="fotos/foto1.jpeg" alt="Portada 1">
-    <p>Hoy celebramos tu vida, tu amor y tu alegría ✨</p>
-  </section>
+  <main>
+    <!-- Portada -->
+    <section class="seccion portada revelar">
+      <div class="foto-marco">
+        <img src="fotos/foto1.jpeg" alt="Mamá - foto principal" data-index="0">
+      </div>
+      <p>Hoy celebramos tu vida, tu amor y tu alegría ✨</p>
+    </section>
 
-  <!-- Mensaje intermedio -->
-  <div class="mensaje">Gracias por ser mi guía ❤️</div>
+    <!-- Mensajes -->
+    <section class="mensaje-box revelar">
+      <div class="mensaje-label">Un mensaje para ti ❤️</div>
+      <p class="mensaje mostrar" id="mensajeCumple">
+        Hoy celebramos a la mujer que lo significa todo. 🎊
+      </p>
+    </section>
 
-  <!-- Carrusel -->
-  <section class="carrusel">
-    <div class="carrusel-track" id="carrusel-track">
-      <img src="fotos/foto2.jpeg" alt="Foto 2">
-      <img src="fotos/foto3.jpeg" alt="Foto 3">
-      <img src="fotos/foto4.jpeg" alt="Foto 4">
-      <img src="fotos/foto5.jpeg" alt="Foto 5">
-      <img src="fotos/foto6.jpeg" alt="Foto 6">
-      <img src="fotos/foto7.jpeg" alt="Foto 7">
-      <img src="fotos/foto8.jpeg" alt="Foto 8">
-      <img src="fotos/foto9.jpeg" alt="Foto 9">
-      <img src="fotos/foto10.jpeg" alt="Foto 10">
-      <img src="fotos/foto11.jpeg" alt="Foto 11">
-      <img src="fotos/foto13.jpg" alt="Foto 13">
-      <img src="fotos/foto14.jpg" alt="Foto 14">
-      <img src="fotos/foto15.jpg" alt="Foto 15">
-      <img src="fotos/foto16.jpg" alt="Foto 16">
-      <img src="fotos/foto17.jpg" alt="Foto 17">
-      <img src="fotos/foto18.jpg" alt="Foto 18">
-      <img src="fotos/foto19.jpg" alt="Foto 19">
-      <img src="fotos/foto20.jpg" alt="Foto 20">
-      <img src="fotos/foto21.jpg" alt="Foto 21">
-      <img src="fotos/foto22.jpg" alt="Foto 22">
-      <img src="fotos/foto23.jpg" alt="Foto 23">
-      <img src="fotos/foto24.jpg" alt="Foto 24">
-      <img src="fotos/foto25.jpg" alt="Foto 25">
-      <img src="fotos/foto26.jpg" alt="Foto 26">
-    </div>
-    <div class="flecha izq" onclick="moverCarrusel(-1)">❮</div>
-    <div class="flecha der" onclick="moverCarrusel(1)">❯</div>
-  </section>
+    <!-- Galería -->
+    <section class="seccion revelar">
+      <div class="titulo-seccion">
+        <h3>📸 Nuestros recuerdos</h3>
+        <p>Desliza, mira las fotos y toca una para verla en grande.</p>
+      </div>
 
+      <div class="carrusel" id="carrusel">
+        <div class="carrusel-track" id="carrusel-track">
 
+          <div class="carrusel-item"><img src="fotos/foto2.jpeg" alt="Foto 2"></div>
+          <div class="carrusel-item"><img src="fotos/foto3.jpeg" alt="Foto 3"></div>
+          <div class="carrusel-item"><img src="fotos/foto4.jpeg" alt="Foto 4"></div>
+          <div class="carrusel-item"><img src="fotos/foto5.jpeg" alt="Foto 5"></div>
+          <div class="carrusel-item"><img src="fotos/foto6.jpeg" alt="Foto 6"></div>
+          <div class="carrusel-item"><img src="fotos/foto7.jpeg" alt="Foto 7"></div>
+          <div class="carrusel-item"><img src="fotos/foto8.jpeg" alt="Foto 8"></div>
+          <div class="carrusel-item"><img src="fotos/foto9.jpeg" alt="Foto 9"></div>
+          <div class="carrusel-item"><img src="fotos/foto10.jpeg" alt="Foto 10"></div>
+          <div class="carrusel-item"><img src="fotos/foto11.jpeg" alt="Foto 11"></div>
+          <div class="carrusel-item"><img src="fotos/foto13.jpg" alt="Foto 13"></div>
+          <div class="carrusel-item"><img src="fotos/foto14.jpg" alt="Foto 14"></div>
+          <div class="carrusel-item"><img src="fotos/foto15.jpg" alt="Foto 15"></div>
+          <div class="carrusel-item"><img src="fotos/foto16.jpg" alt="Foto 16"></div>
+          <div class="carrusel-item"><img src="fotos/foto17.jpg" alt="Foto 17"></div>
+          <div class="carrusel-item"><img src="fotos/foto18.jpg" alt="Foto 18"></div>
+          <div class="carrusel-item"><img src="fotos/foto19.jpg" alt="Foto 19"></div>
+          <div class="carrusel-item"><img src="fotos/foto20.jpg" alt="Foto 20"></div>
+          <div class="carrusel-item"><img src="fotos/foto21.jpg" alt="Foto 21"></div>
+          <div class="carrusel-item"><img src="fotos/foto22.jpg" alt="Foto 22"></div>
+          <div class="carrusel-item"><img src="fotos/foto23.jpg" alt="Foto 23"></div>
+          <div class="carrusel-item"><img src="fotos/foto24.jpg" alt="Foto 24"></div>
+          <div class="carrusel-item"><img src="fotos/foto25.jpg" alt="Foto 25"></div>
+          <div class="carrusel-item"><img src="fotos/foto26.jpg" alt="Foto 26"></div>
 
+        </div>
 
-<!-- Mensaje intermedio -->
-<div class="mensaje" id="mensajeCumple">
-  Hoy celebramos a la mujer que lo significa todo. 🎊
-</div>
+        <button class="flecha izq" id="prevCarousel" aria-label="Foto anterior">❮</button>
+        <button class="flecha der" id="nextCarousel" aria-label="Foto siguiente">❯</button>
+        <div class="contador" id="contador">1 / 24</div>
+      </div>
+    </section>
 
+    <!-- Segunda portada -->
+    <section class="seccion portada portada-final revelar">
+      <div class="foto-marco">
+        <img src="fotos/foto12.jpg" alt="Mamá - foto final">
+      </div>
+      <p>Eres la reina de nuestra familia 👑</p>
+    </section>
+  </main>
 
-
-
-  <!-- Portada 2 -->
-  <section class="portada">
-    <img src="fotos/foto12.jpg" alt="Portada 2">
-    <p>Eres la reina de nuestra familia 👑</p>
-  </section>
-
-  <!-- Final -->
   <footer>
-    🌹 ¡Te amo, Mamá! Feliz cumpleaños #61 🎂  
-    <br>Tu hijo, Alejandro 💖
+    <div class="corazon-grande">❤️</div>
+    <h3>¡Te amo, Mamá!</h3>
+    <p>Feliz cumpleaños #61 🎂✨</p>
+    <p>Tu hijo, Alejandro 💖</p>
   </footer>
 
-  <!-- Música -->
-  <audio id="audio" src="musica/SerenataAMamá.mp3"></audio>
+  <audio id="audio" src="musica/SerenataAMamá.mp3" preload="auto"></audio>
 
   <!-- Lightbox -->
-  <div class="lightbox" id="lightbox">
-    <span class="close" id="closeLightbox">✖</span>
-    <span class="nav izq" id="prevLightbox">❮</span>
-    <img id="lightboxImg" src="">
-    <span class="nav der" id="nextLightbox">❯</span>
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visor de fotografías">
+    <button class="close" id="closeLightbox" aria-label="Cerrar">✕</button>
+    <button class="nav izq" id="prevLightbox" aria-label="Foto anterior">❮</button>
+    <img id="lightboxImg" src="" alt="Foto ampliada">
+    <button class="nav der" id="nextLightbox" aria-label="Foto siguiente">❯</button>
     <p id="lightboxText"></p>
   </div>
 
   <script>
-    // Frases
+    /* =========================
+       FRASES DE LAS FOTOGRAFÍAS
+       ========================= */
     const frases = [
       "Recuerdo lleno de sonrisas 😊",
       "Un día especial que siempre guardamos en el corazón ❤️",
@@ -325,108 +715,277 @@
       "Gracias por ser tú 🌟"
     ];
 
+    /* =========================
+       MENSAJES ROTATIVOS
+       ========================= */
     const frasesCumple = [
-    "Hoy celebramos a la mujer que lo significa todo. 🎊",
-    "61 años llenando nuestras vidas de amor. ❤️",
-    "Gracias por cada abrazo, cada consejo y cada sonrisa. 🌷",
-    "Tu amor es el regalo más bonito que tenemos. 💕",
-    "Que la vida te regale muchos años más de felicidad. ✨",
-    "Te amamos muchísimo, mamá. ¡Feliz cumpleaños! 🎂❤️"
-  ];
+      "Hoy celebramos a la mujer que lo significa todo. 🎊",
+      "61 años llenando nuestras vidas de amor. ❤️",
+      "Gracias por cada abrazo, cada consejo y cada sonrisa. 🌷",
+      "Tu amor es el regalo más bonito que tenemos. 💕",
+      "Que la vida te regale muchos años más de felicidad. ✨",
+      "Te amamos muchísimo, mamá. ¡Feliz cumpleaños! 🎂❤️",
+      "Aunque estemos lejos, mi corazón siempre está contigo. 🇨🇴❤️🇪🇸",
+      "Gracias por ser mi guía, mi apoyo y mi hogar. 🥹❤️"
+    ];
 
-  let indiceCumple = 0;
-  const mensajeCumple = document.getElementById("mensajeCumple");
+    let indiceCumple = 0;
+    const mensajeCumple = document.getElementById("mensajeCumple");
 
-  setInterval(() => {
+    setInterval(() => {
+      mensajeCumple.classList.add("ocultar");
 
-    mensajeCumple.classList.add("ocultar");
+      setTimeout(() => {
+        indiceCumple = (indiceCumple + 1) % frasesCumple.length;
+        mensajeCumple.textContent = frasesCumple[indiceCumple];
+        mensajeCumple.classList.remove("ocultar");
+        mensajeCumple.classList.remove("mostrar");
+        void mensajeCumple.offsetWidth;
+        mensajeCumple.classList.add("mostrar");
+      }, 450);
+    }, 4200);
 
-    setTimeout(() => {
-      indiceCumple = (indiceCumple + 1) % frasesCumple.length;
-      mensajeCumple.textContent = frasesCumple[indiceCumple];
-      mensajeCumple.classList.remove("ocultar");
-    }, 600);
 
-  }, 4000);
-
-
-    // Música
+    /* =========================
+       MÚSICA
+       ========================= */
     const audio = document.getElementById("audio");
     const playBtn = document.getElementById("playMusic");
-    playBtn.addEventListener("click", () => {
-      audio.play();
-      playBtn.style.display = "none";
+
+    playBtn.addEventListener("click", async () => {
+      try {
+        if (audio.paused) {
+          await audio.play();
+          playBtn.textContent = "🎵 Reproduciendo nuestra serenata";
+          playBtn.classList.add("playing");
+        } else {
+          audio.pause();
+          playBtn.textContent = "▶️ Reproducir nuestra serenata";
+          playBtn.classList.remove("playing");
+        }
+      } catch (error) {
+        console.error("No se pudo reproducir la música:", error);
+        playBtn.textContent = "⚠️ No se pudo reproducir";
+      }
     });
 
-    // Carrusel
+    audio.addEventListener("ended", () => {
+      playBtn.textContent = "🔁 Reproducir nuestra serenata";
+      playBtn.classList.remove("playing");
+    });
+
+
+    /* =========================
+       CARRUSEL
+       ========================= */
     const track = document.getElementById("carrusel-track");
-    const imgs = track.getElementsByTagName("img");
+    const items = Array.from(track.querySelectorAll(".carrusel-item"));
+    const contador = document.getElementById("contador");
+    const carousel = document.getElementById("carrusel");
     let index = 0;
+    let autoPlay;
 
     function mostrarCarrusel() {
-      for (let i = 0; i < imgs.length; i++) {
-        imgs[i].classList.remove("centro");
-      }
-      imgs[index].classList.add("centro");
-      const offset = -index * 220;
-      track.style.transform = `translateX(${offset + (track.parentElement.offsetWidth/2 - 110)}px)`;
-    }
-    function moverCarrusel(dir) {
-      index += dir;
-      if (index < 0) index = imgs.length - 1;
-      if (index >= imgs.length) index = 0;
-      mostrarCarrusel();
-    }
-    setInterval(() => moverCarrusel(1), 5000);
-    mostrarCarrusel();
+      items.forEach(item => item.classList.remove("centro"));
 
-    // Lightbox
+      const item = items[index];
+      item.classList.add("centro");
+
+      const itemWidth = item.offsetWidth;
+      const gap = 16;
+      const centerPosition = (carousel.clientWidth / 2) - (itemWidth / 2);
+      const offset = centerPosition - (index * (itemWidth + gap));
+
+      track.style.transform = `translateX(${offset}px)`;
+      contador.textContent = `${index + 1} / ${items.length}`;
+    }
+
+    function moverCarrusel(dir) {
+      index = (index + dir + items.length) % items.length;
+      mostrarCarrusel();
+      reiniciarAutoPlay();
+    }
+
+    document.getElementById("prevCarousel").addEventListener("click", () => moverCarrusel(-1));
+    document.getElementById("nextCarousel").addEventListener("click", () => moverCarrusel(1));
+
+    function iniciarAutoPlay() {
+      autoPlay = setInterval(() => {
+        index = (index + 1) % items.length;
+        mostrarCarrusel();
+      }, 5000);
+    }
+
+    function reiniciarAutoPlay() {
+      clearInterval(autoPlay);
+      iniciarAutoPlay();
+    }
+
+    window.addEventListener("resize", mostrarCarrusel);
+
+    mostrarCarrusel();
+    iniciarAutoPlay();
+
+    /* Pausar carrusel al pasar el mouse */
+    carousel.addEventListener("mouseenter", () => clearInterval(autoPlay));
+    carousel.addEventListener("mouseleave", iniciarAutoPlay);
+
+
+    /* =========================
+       LIGHTBOX
+       ========================= */
     const lightbox = document.getElementById("lightbox");
     const lightboxImg = document.getElementById("lightboxImg");
     const lightboxText = document.getElementById("lightboxText");
     const closeLightbox = document.getElementById("closeLightbox");
     const prevLightbox = document.getElementById("prevLightbox");
     const nextLightbox = document.getElementById("nextLightbox");
+
     let currentIndex = 0;
+
+    function obtenerImagenes() {
+      return items.map(item => item.querySelector("img"));
+    }
 
     function openLightbox(i) {
       currentIndex = i;
-      lightbox.style.display = "flex";
-      lightboxImg.src = imgs[i].src;
-      lightboxText.textContent = frases[i % frases.length] || "";
+      const imagenes = obtenerImagenes();
+
+      lightboxImg.src = imagenes[i].src;
+      lightboxImg.alt = imagenes[i].alt;
+      lightboxText.textContent = frases[i % frases.length];
+      lightbox.classList.add("activo");
+      document.body.style.overflow = "hidden";
     }
 
-    for (let i = 0; i < imgs.length; i++) {
-      imgs[i].addEventListener("click", () => openLightbox(i));
-    }
-
-    function close() { lightbox.style.display = "none"; }
-    function prev() {
-      currentIndex = (currentIndex - 1 + imgs.length) % imgs.length;
-      openLightbox(currentIndex);
-    }
-    function next() {
-      currentIndex = (currentIndex + 1) % imgs.length;
-      openLightbox(currentIndex);
-    }
-
-    closeLightbox.addEventListener("click", close);
-    prevLightbox.addEventListener("click", prev);
-    nextLightbox.addEventListener("click", next);
-    lightbox.addEventListener("click", (e) => {
-      if (e.target === lightbox) close();
+    items.forEach((item, i) => {
+      item.querySelector("img").addEventListener("click", () => openLightbox(i));
     });
 
-    // Confeti
-    for (let i = 0; i < 50; i++) {
-      const confeti = document.createElement("div");
-      confeti.classList.add("confeti");
-      confeti.style.left = Math.random() * 100 + "vw";
-      confeti.style.top = -Math.random() * 20 + "vh";
-      confeti.style.backgroundColor = ["#ff3366","#ffcc00","#66ccff","#33cc33"][Math.floor(Math.random()*4)];
-      confeti.style.animationDuration = (Math.random() * 3 + 2) + "s";
-      document.body.appendChild(confeti);
+    function cerrarLightbox() {
+      lightbox.classList.remove("activo");
+      document.body.style.overflow = "";
     }
+
+    function anterior() {
+      currentIndex = (currentIndex - 1 + items.length) % items.length;
+      openLightbox(currentIndex);
+    }
+
+    function siguiente() {
+      currentIndex = (currentIndex + 1) % items.length;
+      openLightbox(currentIndex);
+    }
+
+    closeLightbox.addEventListener("click", cerrarLightbox);
+    prevLightbox.addEventListener("click", anterior);
+    nextLightbox.addEventListener("click", siguiente);
+
+    lightbox.addEventListener("click", e => {
+      if (e.target === lightbox) cerrarLightbox();
+    });
+
+    document.addEventListener("keydown", e => {
+      if (!lightbox.classList.contains("activo")) return;
+
+      if (e.key === "Escape") cerrarLightbox();
+      if (e.key === "ArrowLeft") anterior();
+      if (e.key === "ArrowRight") siguiente();
+    });
+
+
+    /* =========================
+       CONFETI
+       ========================= */
+    const simbolos = ["🎉","✨","💕","🌸","💐","⭐"];
+
+    function lanzarConfeti(cantidad = 45) {
+      for (let i = 0; i < cantidad; i++) {
+        const confeti = document.createElement("div");
+        confeti.className = "confeti";
+        confeti.textContent = simbolos[Math.floor(Math.random() * simbolos.length)];
+        confeti.style.left = Math.random() * 100 + "vw";
+        confeti.style.fontSize = (12 + Math.random() * 15) + "px";
+        confeti.style.animationDuration = (3 + Math.random() * 4) + "s";
+        confeti.style.animationDelay = Math.random() * 2 + "s";
+        document.body.appendChild(confeti);
+
+        setTimeout(() => confeti.remove(), 8000);
+      }
+    }
+
+    lanzarConfeti(35);
+    setTimeout(() => lanzarConfeti(25), 5000);
+
+
+    /* =========================
+       CORAZONES FLOTANTES
+       ========================= */
+    const contenedorCorazones = document.getElementById("corazones");
+
+    function crearCorazon() {
+      const corazon = document.createElement("span");
+      corazon.className = "corazon";
+      corazon.textContent = ["❤️","💕","💗","💖","🌸"][Math.floor(Math.random() * 5)];
+      corazon.style.left = Math.random() * 100 + "%";
+      corazon.style.fontSize = (13 + Math.random() * 18) + "px";
+      corazon.style.animationDuration = (7 + Math.random() * 7) + "s";
+      corazon.style.animationDelay = Math.random() * 3 + "s";
+      contenedorCorazones.appendChild(corazon);
+
+      setTimeout(() => corazon.remove(), 15000);
+    }
+
+    for(let i = 0; i < 12; i++) crearCorazon();
+    setInterval(crearCorazon, 1600);
+
+
+    /* =========================
+       REVELAR AL HACER SCROLL
+       ========================= */
+    const elementosRevelar = document.querySelectorAll(".revelar");
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add("visible");
+        }
+      });
+    }, {threshold:.12});
+
+    elementosRevelar.forEach(el => observer.observe(el));
+
+
+    /* =========================
+       BARRA DE PROGRESO
+       ========================= */
+    window.addEventListener("scroll", () => {
+      const scrollTop = window.scrollY;
+      const altura = document.documentElement.scrollHeight - window.innerHeight;
+      const porcentaje = altura > 0 ? (scrollTop / altura) * 100 : 0;
+      document.getElementById("progress").style.width = porcentaje + "%";
+    });
+
+
+    /* =========================
+       SWIPE EN CELULAR
+       ========================= */
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    carousel.addEventListener("touchstart", e => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, {passive:true});
+
+    carousel.addEventListener("touchend", e => {
+      touchEndX = e.changedTouches[0].screenX;
+      const diferencia = touchEndX - touchStartX;
+
+      if(Math.abs(diferencia) > 50){
+        moverCarrusel(diferencia < 0 ? 1 : -1);
+      }
+    }, {passive:true});
   </script>
 </body>
 </html>
+
