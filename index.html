@@ -269,56 +269,7 @@
   Hoy celebramos a la mujer que lo significa todo. 🎊
 </div>
 
-<style>
-  .mensaje {
-    font-size: 1.4rem;
-    text-align: center;
-    font-weight: 500;
-    animation: aparecer 1.5s ease-in-out;
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
 
-  .mensaje.ocultar {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-
-  @keyframes aparecer {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-</style>
-
-<script>
-  const frases = [
-    "Hoy celebramos a la mujer que lo significa todo. 🎊",
-    "61 años llenando nuestras vidas de amor. ❤️",
-    "Gracias por cada abrazo, cada consejo y cada sonrisa. 🌷",
-    "Tu amor es el regalo más bonito que tenemos. 💕",
-    "Que la vida te regale muchos años más de felicidad. ✨",
-    "Te amamos muchísimo, mamá. ¡Feliz cumpleaños! 🎂❤️"
-  ];
-
-  let indice = 0;
-  const mensaje = document.getElementById("mensajeCumple");
-
-  setInterval(() => {
-    mensaje.classList.add("ocultar");
-
-    setTimeout(() => {
-      indice = (indice + 1) % frases.length;
-      mensaje.textContent = frases[indice];
-      mensaje.classList.remove("ocultar");
-    }, 600);
-
-  }, 4000);
-</script>
 
 
   <!-- Portada 2 -->
@@ -373,6 +324,31 @@
       "Siempre estaremos agradecidos 💐",
       "Gracias por ser tú 🌟"
     ];
+
+    const frasesCumple = [
+    "Hoy celebramos a la mujer que lo significa todo. 🎊",
+    "61 años llenando nuestras vidas de amor. ❤️",
+    "Gracias por cada abrazo, cada consejo y cada sonrisa. 🌷",
+    "Tu amor es el regalo más bonito que tenemos. 💕",
+    "Que la vida te regale muchos años más de felicidad. ✨",
+    "Te amamos muchísimo, mamá. ¡Feliz cumpleaños! 🎂❤️"
+  ];
+
+  let indiceCumple = 0;
+  const mensajeCumple = document.getElementById("mensajeCumple");
+
+  setInterval(() => {
+
+    mensajeCumple.classList.add("ocultar");
+
+    setTimeout(() => {
+      indiceCumple = (indiceCumple + 1) % frasesCumple.length;
+      mensajeCumple.textContent = frasesCumple[indiceCumple];
+      mensajeCumple.classList.remove("ocultar");
+    }, 600);
+
+  }, 4000);
+
 
     // Música
     const audio = document.getElementById("audio");
